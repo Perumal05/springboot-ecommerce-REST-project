@@ -1,0 +1,29 @@
+package com.zuna.ecommerce.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+
+import com.zuna.ecommerce.dto.ProductReviewDto;
+import com.zuna.ecommerce.service.ProductService;
+
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PostMapping;
+
+
+@RestController
+@RequestMapping("/api/products/reviews")
+public class ProductReviewController {
+
+    @Autowired
+    private ProductService productService;
+
+    @PostMapping
+    public ResponseEntity<?> addReview(@RequestBody ProductReviewDto reviewDto) {
+        productService.addProductReview(reviewDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Review added successfully");
+    }
+
+}
